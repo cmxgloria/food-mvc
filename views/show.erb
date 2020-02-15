@@ -1,0 +1,28 @@
+<h1>dish details</h1>
+
+<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsam veniam, quisquam inventore id distinctio voluptatum a, rerum, voluptatem adipisci modi error optio dolores veritatis totam recusandae aspernatur! Voluptatum, velit praesentium.</p>
+
+<p><%= @dish['name'] %></p>
+
+<p>number of likes: <span class="likes_count"><%= @likes_count %></span></p>
+
+
+<form action="/likes" method="post">
+  <input type="hidden" name="dish_id" value="<%= @dish['id'] %>">
+  <button>like</button>
+</form>
+
+
+<script>
+  const form = document.querySelector('form')
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    axios({ url: '/api/likes', method: 'post', params: { dish_id: 25 }})
+      .then(res => {
+        document.querySelector('.likes_count').textContent = res.data.likes_count
+      })   
+
+  })
+</script>
